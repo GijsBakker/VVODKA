@@ -9,11 +9,16 @@ __version__ = 0.1
 
 import CreateDotPlot
 import KMer
+import ReadFasta
+
+
+TESTSEQONE = "ATCG"
+TESTSEQTWO = "GATCGATC"
 
 
 def main():
-    sequence_one = "ATCG"
-    sequence_two = "GATCGATC"
+    sequenceOne = ReadFasta.read_fasta("../data/prochlorococcus/LG.fa")
+    sequenceOne = ReadFasta.read_fasta("../data/prochlorococcus/MED4.fa")
     size = 3
     positions = KMer.find_overlapping_kmers(sequence_one, sequence_two, size)
     CreateDotPlot.create_dot_plot(positions[0], positions[1], sequence_one, sequence_two)
