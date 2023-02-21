@@ -16,7 +16,7 @@ def main():
     sequence_two = "GATCGATC"
     size = 3
     positions = KMer.find_overlapping_kmers(sequence_one, sequence_two, size)
-    CreateDotPlot.create_dot_plot(positions[0], positions[1])
+    CreateDotPlot.create_dot_plot(positions[0], positions[1], sequence_one, sequence_two)
 
 
 if __name__ == '__main__':
