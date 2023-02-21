@@ -12,6 +12,8 @@ import matplotlib.pyplot as plt
 
 def create_dot_plot(positions_x, positions_y, sequenceOne, sequenceTwo):
     """
+    Creates a dot plot showing the k-mers present in both sequences. The first nucleotide of the duplicate k-mers are
+        marked with a dot
     :param positions_x: A list containing all x positions
     :param positions_y: A list containing all y positions
     :return: a dot plot of the given points
