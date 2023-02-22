@@ -1,32 +1,31 @@
 #!/usr/bin/python3
 
 usage = """
-GenomeDotPlotter
+Main.py: main.py is used to handle the user input, call the right functions and return the final output
 
 Usage:
 main.py -k <kmerSize> -f <file> <file> ...
 main.py (-h | --help | --version)
 """
 
-"""
-Main.py: main.py is used to handle the user input, call the right functions and return the final output
-"""
-
-
 __author__ = "Gijs Bakker"
 __version__ = 0.1
 
+from docopt import docopt
 import CreateDotPlot
 import KMer
 import ReadFasta
-from docopt import docopt
+import time
 
+RUN = 3
+SETTINGS = "No Multithreading"
 
 def main(args):
     """
     This validates all given arguments
     :param args: docopt arguments
     """
+    start_time = time.time()
     kmer_size = int(args['<kmerSize>'])
     files = args['<file>']
 
@@ -39,6 +38,11 @@ def main(args):
 
     print("Making plot")
     CreateDotPlot.create_dot_plot(positions[0], positions[1], sequences[0], sequences[1])
+
+    stop_time = time.time()
+    f = open("../Logs/log.txt", "a")
+    f.write(f"Run {RUN} with settings {SETTINGS}: time {stop_time - start_time} seconds\n")
+    f.close()
 
 
 if __name__ == '__main__':
