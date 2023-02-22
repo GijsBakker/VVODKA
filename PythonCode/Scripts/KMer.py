@@ -5,7 +5,6 @@ KMer.py: Is used to find k-mers in genomes
 """
 
 import re
-from KmerFinder import KmerFinder
 
 
 def find_kmer(k_mer, sequence):
@@ -54,7 +53,6 @@ def find_overlapping_kmers(sequence_one, sequence_two, size):
         kmers = find_kmer(str(kmer), str(sequence_two))
         positions_y += kmers
         positions_x += [position_x for i in range(len(kmers))]
-
 
     overlap_positions = [positions_x, positions_y]
     return overlap_positions
