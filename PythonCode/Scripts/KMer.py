@@ -4,6 +4,8 @@
 KMer.py: Is used to find k-mers in genomes
 """
 
+import re
+
 
 def find_kmer(k_mer, sequence):
     """
@@ -13,15 +15,7 @@ def find_kmer(k_mer, sequence):
     :param sequence: a sequence string
     :return: a list of the positions of the found kmers
     """
-
-    # TODO determine where the position is marked. (The first of the kmer or in the middle. Even number can be a
-    #  problem)
-    kmer_len = len(k_mer)
-    positions = []
-    for pos in range(len(sequence)):
-        if sequence[pos:pos+kmer_len] == k_mer:
-            positions.append(pos)
-    return positions
+    return [match.start() for match in re.finditer(k_mer, sequence)]
 
 
 def sequence_to_kmer(sequence, kmer_size):
@@ -49,11 +43,16 @@ def find_overlapping_kmers(sequence_one, sequence_two, size):
     :param size: size of the kmers. Cannot be smaller than 1
     :return:
     """
+    print("Getting K-mers")
     kmer_list = sequence_to_kmer(sequence_one, size)
     positions_x = []
     positions_y = []
+
+    print("Searching for matches")
+    percentage = 0
     for position_x, kmer in enumerate(kmer_list):
-        kmers = find_kmer(kmer, sequence_two)
+
+        kmers = find_kmer(str(kmer), str(sequence_two))
         positions_y += kmers
         positions_x += [position_x for i in range(len(kmers))]
     overlap_positions = [positions_x, positions_y]
