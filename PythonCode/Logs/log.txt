@@ -1,0 +1,55 @@
+Run with the testData/*Repeated
+Run 1 with settings Multithreading: time 16.298391580581665 seconds
+Run 2 with settings No Multithreading: time 8.383319616317749 seconds
+Run 3 with settings No Multithreading: time 8.800464153289795 seconds
+Run 4 with settings Multithreading: time 17.116692781448364 seconds
+Run 5 with settings No Multithreading: time 9.908553838729858 seconds
+
+New Way of MultiThreading:
+Run 1 with settings Splitting the data MultiThreaded: time 0.6989753246307373 seconds
+Run 2 with settings Splitting the data MultiThreaded: time 0.7367167472839355 seconds
+Run 3 with settings Splitting the data MultiThreaded: time 0.7711565494537354 seconds
+
+Run 1 with settings No MultiThread for control: time 0.8022136688232422 seconds
+
+
+Testing with larger dataset (Repeated)
+
+Run 1 with settings Splitting the data MultiThreaded: time 8.907166481018066 seconds
+Run 2 with settings Splitting the data MultiThreaded: time 8.065563440322876 seconds
+Run 3 with settings Splitting the data MultiThreaded: time 7.939016819000244 seconds
+Average: 8.30391558011 Seconds
+
+Run 1 with settings No MultiThread for control: time 8.669113636016846 seconds
+Run 2 with settings No MultiThread for control: time 8.70897912979126 seconds
+Run 3 with settings No MultiThread for control: time 8.647568941116333 seconds
+Average: 8.67522056897 Seconds
+
+* Multithreading 1.04471444649 times as fast
+
+Test With more repeats
+Run 1 with settings Splitting the data MultiThreaded: time 617.7091674804688 seconds
+Run 1 with settings No MultiThread for control: time 667.232629776001 seconds
+
+normal repeated
+Run 1 with settings Splitting the data MultiThreaded 8: time 7.923871278762817 seconds
+Run 1 with settings Splitting the data MultiThreaded 16 instead of 8: time 8.825714349746704 seconds
+Run 1 with settings Splitting the data MultiThreaded 16 instead of 8: time 8.848644495010376 seconds
+Run 1 with settings Splitting the data MultiThreaded 4 instead of 8: time 7.924349069595337 seconds
+
+
+Run 1 with settings Splitting data Repeated: time 8.564343929290771 seconds
+Run 2 with settings Splitting data Repeated: time 8.62186336517334 seconds
+Run 1 with settings No splitting data Repeated: time 8.743117332458496 seconds
+Run 2 with settings No splitting data Repeated: time 8.61103081703186 seconds
+
+Run 1 with settings Multi Processed: time 2.9496681690216064 seconds
+Run 2 with settings Multi Processed: time 2.8210480213165283 seconds
+Run 1 with settings Not Multi Processed: time 8.436988830566406 seconds
+Run 2 with settings Not Multi Processed: time 8.440138816833496 seconds
+
+* multi processing is ~2.92 times faster
+
+Larga test data test:
+Run 1 with settings Multi Processed Large Set: time 146.22908306121826 seconds
+Run 1 with settings Not Multi Processed Large Set: time 636.7376115322113 seconds

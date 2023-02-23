@@ -17,8 +17,9 @@ import KMer
 import ReadFasta
 import time
 
-RUN = 3
-SETTINGS = "No Multithreading"
+RUN = 1
+SETTINGS = "Not Multi Processed Large Set"
+
 
 def main(args):
     """

@@ -3,8 +3,9 @@
 """
 KMer.py: Is used to find k-mers in genomes
 """
-
+import math
 import re
+import multiprocessing as mp
 
 
 def find_kmer(k_mer, sequence):
@@ -33,6 +34,56 @@ def sequence_to_kmer(sequence, kmer_size):
     return kmers
 
 
+def find_group_kmers(kmers, sequence, start_pos_x):
+    """
+    This function takes a group of kmers and find all those kmers in the given sequence
+    :param start_pos_x: The position of these kmers within the first sequence
+    :param kmers: List of kmer strings
+    :param sequence: sequence string
+    :return: a list of the x and y positions [[x1,x2,..], [y1,y2,...]]
+    """
+    pos_y = []
+    pos_x = []
+
+    for kmer_number, kmer in enumerate(kmers):
+        kmers = find_kmer(str(kmer), str(sequence))
+        pos_y += kmers
+        pos_x += [start_pos_x + kmer_number for i in range(len(kmers))]
+
+    return [pos_x, pos_y]
+
+
+def multi_run_wrapper(args):
+    return find_group_kmers(*args)
+
+
+def multi_process(cores, kmers, sequence):
+    # split kmers in equal groups
+    kmer_range = math.floor(len(kmers)/cores)
+    kmer_groups = []
+    if kmer_range >= 1:
+        for i in range(cores-1):
+            kmer_groups.append([kmer for kmer in kmers[i*kmer_range: (i+1)*kmer_range]])
+
+    # add last group which is smaller
+    kmer_groups.append(kmers[(cores-1)*kmer_range: len(kmers)])
+
+    pos_x = []
+    pos_y = []
+
+    # multi Processed
+    p = mp.Pool(processes=cores)
+    args = [[kmer_group, sequence, start_pos_x*kmer_range] for start_pos_x, kmer_group in enumerate(kmer_groups)]
+    all_data = p.map(multi_run_wrapper, args)
+
+    # unpack data for each run
+    for data in all_data:
+        pos_x += data[0]
+        pos_y += data[1]
+
+    return [pos_x, pos_y]
+
+
 def find_overlapping_kmers(sequence_one, sequence_two, size):
     """
     This function finds the overlapping kmers between two sequences.
@@ -45,14 +96,10 @@ def find_overlapping_kmers(sequence_one, sequence_two, size):
     """
     print("Getting K-mers")
     kmer_list = sequence_to_kmer(sequence_one, size)
-    positions_x = []
-    positions_y = []
 
     print("Searching for matches")
-    for position_x, kmer in enumerate(kmer_list):
-        kmers = find_kmer(str(kmer), str(sequence_two))
-        positions_y += kmers
-        positions_x += [position_x for i in range(len(kmers))]
+
+    positions_x, positions_y = multi_process(8, kmer_list, sequence_two)
 
     overlap_positions = [positions_x, positions_y]
     return overlap_positions
