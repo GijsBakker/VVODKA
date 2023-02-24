@@ -32,14 +32,23 @@ def main(args):
     cores = int(args['<cores>'])
 
     print("Extracting Sequences")
-    sequences = [ReadFasta.read_fasta(file).seq for file in files]
+    sequences = [ReadFasta.read_fasta(file) for file in files]
 
-    print("Finding overlapping sequences")
-    # TODO: if given multiple files must compare each against each other
-    positions = KMer.find_overlapping_kmers(sequences[0], sequences[1], kmer_size, cores)
+    # should compare all files
+    indexes = [i for i in range(len(sequences))]
+    while len(indexes) > 1:
+        for i in indexes[1:len(indexes)]:
+            first = indexes[0]
+            print(f"Matching {files[first]} against {files[i]}")
 
-    print("Making plot")
-    CreateDotPlot.create_dot_plot(positions[0], positions[1], sequences[0], sequences[1])
+            print("Finding overlapping sequences")
+            # TODO: if given multiple files must compare each against each other
+            positions = KMer.find_overlapping_kmers(sequences[first].seq, sequences[i].seq, kmer_size, cores)
+
+            print("Making plot")
+            CreateDotPlot.create_dot_plot(positions[0], positions[1], sequences[first], sequences[i])
+
+        indexes = indexes[1:len(indexes)]
 
     stop_time = time.time()
     # f = open("../Logs/log.txt", "a")

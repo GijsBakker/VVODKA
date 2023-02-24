@@ -21,18 +21,4 @@ def create_dot_plot(positions_x, positions_y, sequenceOne, sequenceTwo):
     fig.update_traces(marker_size=10)
     fig.update_xaxes(range=[0, len(sequenceOne)-1], fixedrange=True)
     fig.update_yaxes(range=[0, len(sequenceTwo)-1], fixedrange=True)
-    # if under 50 length replace numbers with the nucleotides
-    if len(sequenceOne) <= 50 and len(sequenceTwo) <= 50:
-        fig.update_layout(
-            xaxis=dict(
-                tickmode='array',
-                tickvals=[*range(len(sequenceOne))],
-                ticktext=list(sequenceOne.strip(" "))
-            ),
-            yaxis=dict(
-                tickmode='array',
-                tickvals=[*range(len(sequenceTwo))],
-                ticktext=list(sequenceTwo.strip(" "))
-            )
-        )
     fig.show()
