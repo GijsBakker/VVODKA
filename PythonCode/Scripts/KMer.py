@@ -54,10 +54,22 @@ def find_group_kmers(kmers, sequence, start_pos_x):
 
 
 def multi_run_wrapper(args):
+    """
+    This function is a way to have multiple arguments in one multiprocess call
+    :param args: The arguments from a multiprocess function call
+    :return: a list of the x and y positions [[x1,x2,..], [y1,y2,...]]
+    """
     return find_group_kmers(*args)
 
 
 def multi_process(cores, kmers, sequence):
+    """
+    This function finds given kmers in a sequence. It does this in a way that supports using multiple cores.
+    :param cores: number of cores
+    :param kmers: A list of kmers
+    :param sequence: The string of a sequence
+    :return: The found positions within a list: [[x1,x2,...], [y1,y2,...]]
+    """
     # split kmers in equal groups
     kmer_range = math.floor(len(kmers)/cores)
     kmer_groups = []
@@ -84,7 +96,7 @@ def multi_process(cores, kmers, sequence):
     return [pos_x, pos_y]
 
 
-def find_overlapping_kmers(sequence_one, sequence_two, size):
+def find_overlapping_kmers(sequence_one, sequence_two, size, cores):
     """
     This function finds the overlapping kmers between two sequences.
     :parallel: In parallel the biggest sequence needs to be split into kmers. This wil increase speed.
@@ -92,14 +104,14 @@ def find_overlapping_kmers(sequence_one, sequence_two, size):
     :param sequence_one: string of the first sequence
     :param sequence_two: string of the second sequence
     :param size: size of the kmers. Cannot be smaller than 1
-    :return:
+    :return: The found positions within a list: [[x1,x2,...], [y1,y2,...]]
     """
     print("Getting K-mers")
     kmer_list = sequence_to_kmer(sequence_one, size)
 
     print("Searching for matches")
 
-    positions_x, positions_y = multi_process(8, kmer_list, sequence_two)
+    positions_x, positions_y = multi_process(cores, kmer_list, sequence_two)
 
     overlap_positions = [positions_x, positions_y]
     return overlap_positions
