@@ -17,7 +17,12 @@ def create_dot_plot(positions_x, positions_y, sequenceOne, sequenceTwo):
     :return: a dot plot of the given points
     """
     df = pd.DataFrame(dict(GenomeOne=positions_x, GenomeTwo=positions_y))
-    fig = px.scatter(df, x="GenomeOne", y="GenomeTwo")
+    fig = px.scatter(df, x="GenomeOne", y="GenomeTwo",
+                     labels={
+                         "GenomeOne": sequenceOne.name,
+                         "GenomeTwo": sequenceTwo.name,
+                     },
+                     title=f"Genome dot plot {sequenceOne.name,} against {sequenceTwo.name}")
     fig.update_traces(marker_size=10)
     fig.update_xaxes(range=[0, len(sequenceOne)-1], fixedrange=True)
     fig.update_yaxes(range=[0, len(sequenceTwo)-1], fixedrange=True)
