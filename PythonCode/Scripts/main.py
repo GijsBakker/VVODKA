@@ -48,7 +48,10 @@ def main(args):
     cores = int(args['<cores>'])
 
     print("Extracting Sequences")
-    sequences = [ReadFasta.read_fasta(file) for file in files]
+    sequences = []
+    for seq in [ReadFasta.read_fasta(file) for file in files]:
+        sequences += seq
+    print(len(sequences))
 
     sequences_time = time.time()
 
@@ -60,7 +63,7 @@ def main(args):
     while len(indexes) > 1:
         for i in indexes[1:len(indexes)]:
             first = indexes[0]
-            print(f"Matching {files[first]} against {files[i]}")
+            print(f"Matching {sequences[first].name} against {sequences[i].name}")
 
             print("Finding overlapping sequences")
             # TODO: if given multiple files must compare each against each other
@@ -72,7 +75,7 @@ def main(args):
         indexes = indexes[1:len(indexes)]
 
     stop_time = time.time()
-    write_time(start_time, sequences_time, kmer_list_time, find_overlap_time, stop_time, cores, kmer_size, files)
+    # write_time(start_time, sequences_time, kmer_list_time, find_overlap_time, stop_time, cores, kmer_size, files)
 
 
 if __name__ == '__main__':

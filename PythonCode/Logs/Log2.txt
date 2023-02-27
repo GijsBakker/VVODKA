@@ -36,3 +36,11 @@ Time to get kmers 0.01000356674194336s.
 Time to get overlap 1.0999250411987305s.
 Time to Plot 0.6531751155853271s.
 Stop Time 1677498745.543815
+
+emale04.fna, mavirus.fna; cores: 8; kmer length: 50
+Start Time 1677499365.5142365
+Time to get sequences 0.00739598274230957s.
+Time to get kmers 7.6711602210998535s.
+Time to get overlap 1.3837554454803467s.
+Time to Plot 0.119049072265625s.
+Stop Time 1677499374.6955972
