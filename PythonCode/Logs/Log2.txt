@@ -1,0 +1,30 @@
+Run TestDataRepeated: Cores 8
+Start Time 1677235580.9240365
+Time to get sequences 0.00900125503540039s.
+Time to get kmers 0.0575253963470459s.
+Time to get overlap 2.2202959060668945s.
+Time to Plot 0.7513809204101562s.
+Stop Time 1677235583.96224
+
+Run TestDataLarge: Cores 8
+Start Time 1677235643.00807
+Time to get sequences 0.01740717887878418s.
+Time to get kmers 0.7318871021270752s.
+Time to get overlap 110.26636528968811s.
+Time to Plot 13.771968603134155s.
+Stop Time 1677235767.7956982
+
+Run RealData: Cores 8 Kmer = 10
+Start Time 1677235862.61907
+Time to get sequences 0.027871370315551758s.
+Time to get kmers 1.6466398239135742s.
+Time to get overlap 1244.4304938316345s.
+Time to Plot 17.48859739303589s.
+Stop Time 1677237126.2126725
+
+Run RealData: Cores 8 Kmer = 100Start Time 1677237307.0181298
+Time to get sequences 0.03150773048400879s.
+Time to get kmers 1.8598864078521729s.
+Time to get overlap 1336.8323068618774s.
+Time to Plot 0.7668530941009521s.
+Stop Time 1677238646.508684

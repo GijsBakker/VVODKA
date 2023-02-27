@@ -5,6 +5,9 @@ KMer.py: Is used to find k-mers in genomes
 """
 import math
 import re
+import time
+
+import main
 import multiprocessing as mp
 
 
@@ -108,10 +111,11 @@ def find_overlapping_kmers(sequence_one, sequence_two, size, cores):
     """
     print("Getting K-mers")
     kmer_list = sequence_to_kmer(sequence_one, size)
+    KMER_LIST_TIME = time.time()
 
     print("Searching for matches")
 
     positions_x, positions_y = multi_process(cores, kmer_list, sequence_two)
-
     overlap_positions = [positions_x, positions_y]
-    return overlap_positions
+    FIND_OVERLAP_TIME = time.time()
+    return overlap_positions, KMER_LIST_TIME, FIND_OVERLAP_TIME

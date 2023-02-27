@@ -24,6 +24,6 @@ def create_dot_plot(positions_x, positions_y, sequenceOne, sequenceTwo):
                      },
                      title=f"Genome dot plot {sequenceOne.name,} against {sequenceTwo.name}")
     fig.update_traces(marker_size=10)
-    fig.update_xaxes(range=[0, len(sequenceOne)-1], fixedrange=True)
-    fig.update_yaxes(range=[0, len(sequenceTwo)-1], fixedrange=True)
+    fig.update_xaxes(range=[0, len(sequenceOne)-1], fixedrange=False)
+    fig.update_yaxes(range=[0, len(sequenceTwo)-1], fixedrange=False)
     fig.show()
