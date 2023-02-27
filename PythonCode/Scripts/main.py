@@ -16,19 +16,23 @@ import CreateDotPlot
 import KMer
 import ReadFasta
 import time
+import os
 
 RUN = 1
 SETTINGS = "Not Multi Processed Large Set"
 
 
-def write_time(start_time, sequences_time, kmer_list_time, find_overlap_time, stop_time):
+def write_time(start_time, sequences_time, kmer_list_time, find_overlap_time, stop_time, cores, kmer, filenames):
     f = open("../Logs/log2.txt", "a")
+    files = ", ".join([os.path.basename(os.path.normpath(file)) for file in filenames])
+
+    f.write(f"\n{files}; cores: {cores}; kmer length: {kmer}\n")
     f.write(f"Start Time {start_time}\n")
     f.write(f"Time to get sequences {sequences_time - start_time}s.\n")
     f.write(f"Time to get kmers {kmer_list_time - sequences_time}s.\n")
     f.write(f"Time to get overlap {find_overlap_time - kmer_list_time}s.\n")
     f.write(f"Time to Plot {stop_time - find_overlap_time}s.\n")
-    f.write(f"Stop Time {stop_time}")
+    f.write(f"Stop Time {stop_time}\n")
     f.close()
 
 
@@ -45,6 +49,7 @@ def main(args):
 
     print("Extracting Sequences")
     sequences = [ReadFasta.read_fasta(file) for file in files]
+
     sequences_time = time.time()
 
     kmer_list_time = None
@@ -67,7 +72,7 @@ def main(args):
         indexes = indexes[1:len(indexes)]
 
     stop_time = time.time()
-    # write_time(start_time, sequences_time, kmer_list_time, find_overlap_time, stop_time)
+    write_time(start_time, sequences_time, kmer_list_time, find_overlap_time, stop_time, cores, kmer_size, files)
 
 
 if __name__ == '__main__':
