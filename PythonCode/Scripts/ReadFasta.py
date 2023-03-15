@@ -3,8 +3,8 @@
 """
 ReadFasta.py: Is used to read in fasta files
 """
-
 from Bio import SeqIO
+import pyfastx
 
 
 def read_fasta(filename):
@@ -13,8 +13,7 @@ def read_fasta(filename):
     :param filename: the name of the to be read file
     :return: A list of all the sequences
     """
-    # TODO could be more than one sequence?
-    sequences = [i for i in SeqIO.parse(filename, "fasta")]
-    seq = sequences[0]
+    # sequences = [i for i in SeqIO.parse(filename, "fasta")]
+    sequences = [i for i in pyfastx.Fasta(filename)]
     return sequences
 

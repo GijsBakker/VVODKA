@@ -7,26 +7,24 @@ import math
 import re
 import time
 
-import main
 import multiprocessing as mp
 
 
 def find_kmer(k_mer, sequence):
     """
     This function compare looks for a k-mer within a sequence
-    :parallel: This function can be run next to other functions with different k_mers
-    :param k_mer: a k_mer string
-    :param sequence: a sequence string
+    :param k_mer: bytearray representing the k-mer
+    :param sequence: bytearray representing the sequence
     :return: a list of the positions of the found kmers
     """
-    return [match.start() for match in re.finditer(k_mer, sequence)]
+    pattern = re.compile(bytes(k_mer))
+    # return [match.start() for match in re.finditer(k_mer, sequence)]
+    return [match.start() for match in pattern.finditer(sequence)]
 
 
 def sequence_to_kmer(sequence, kmer_size):
     """
     This function splits a sequence into k_mers
-    :parallel: This function is necessary for a parallel program. This function wil be run so after each thread can have
-        its own k_mers. This function is not necessary when not run in parallel.
     :param sequence: A string of the sequence
     :param kmer_size: The size of the k_mers. Has to be more than 0 and not larger than the sequence
     :return: A list of all the K_mers
@@ -41,15 +39,15 @@ def find_group_kmers(kmers, sequence, start_pos_x):
     """
     This function takes a group of kmers and find all those kmers in the given sequence
     :param start_pos_x: The position of these kmers within the first sequence
-    :param kmers: List of kmer strings
-    :param sequence: sequence string
+    :param kmers: List of bytearrays representing the k-mer
+    :param sequence: bytearray representing the sequence
     :return: a list of the x and y positions [[x1,x2,..], [y1,y2,...]]
     """
     pos_y = []
     pos_x = []
 
     for kmer_number, kmer in enumerate(kmers):
-        kmers = find_kmer(str(kmer), str(sequence))
+        kmers = find_kmer(kmer, sequence)
         pos_y += kmers
         pos_x += [start_pos_x + kmer_number for i in range(len(kmers))]
 
@@ -69,8 +67,8 @@ def multi_process(cores, kmers, sequence):
     """
     This function finds given kmers in a sequence. It does this in a way that supports using multiple cores.
     :param cores: number of cores
-    :param kmers: A list of kmers
-    :param sequence: The string of a sequence
+    :param kmers: A list of bytearrays representing the k-mer
+    :param sequence: bytearray representing the sequence
     :return: The found positions within a list: [[x1,x2,...], [y1,y2,...]]
     """
     # split kmers in equal groups
@@ -102,20 +100,16 @@ def multi_process(cores, kmers, sequence):
 def find_overlapping_kmers(sequence_one, sequence_two, size, cores):
     """
     This function finds the overlapping kmers between two sequences.
-    :parallel: In parallel the biggest sequence needs to be split into kmers. This wil increase speed.
-        The kmers can be split over multiple processes.
-    :param sequence_one: string of the first sequence
-    :param sequence_two: string of the second sequence
+    :param sequence_one: bytearray of the first sequence
+    :param sequence_two: bytearray of the second sequence
     :param size: size of the kmers. Cannot be smaller than 1
     :return: The found positions within a list: [[x1,x2,...], [y1,y2,...]]
     """
     print("Getting K-mers")
     kmer_list = sequence_to_kmer(sequence_one, size)
-    KMER_LIST_TIME = time.time()
 
     print("Searching for matches")
 
     positions_x, positions_y = multi_process(cores, kmer_list, sequence_two)
     overlap_positions = [positions_x, positions_y]
-    FIND_OVERLAP_TIME = time.time()
-    return overlap_positions, KMER_LIST_TIME, FIND_OVERLAP_TIME
+    return overlap_positions
