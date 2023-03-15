@@ -96,13 +96,14 @@ def main(args):
     # create plots
     print("Making plots")
 
-    # for position in positions:
-    #     fig, file = CreateDotPlot.create_dot_plot(position[0], position[1], position[2], position[3])
-    #     fig.savefig(file, dpi=300)
+    for position in positions:
+        fig, file = CreateDotPlot.create_dot_plot(position[0], position[1], position[2], position[3])
+        fig.savefig(file, dpi=300)
 
-    # creating one plot
-    fig = CreateDotPlot.create_combined_plots(positions, "???")
-    fig.savefig("../Results/Test.png", dpi=300)
+    # works only if multiple plots can be made and is ugly
+    # # creating one plot
+    # fig = CreateDotPlot.create_combined_plots(positions, "Plots")
+    # fig.savefig("../Results/Test.png", dpi=300)
 
 
 if __name__ == '__main__':

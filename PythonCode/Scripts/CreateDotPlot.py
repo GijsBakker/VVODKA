@@ -12,6 +12,7 @@ import pandas as pd
 
 def create_combined_plots(positions, title):
     mpl.use('TkAgg')
+    print(len(positions))
     fig, axs = plt.subplots(len(positions))
     fig.suptitle(title)
     for index, pos in enumerate(positions):
