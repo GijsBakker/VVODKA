@@ -36,7 +36,9 @@ def sequence_to_kmer(sequence, kmer_size):
     """
     kmers = []
     for start in range(len(sequence)-kmer_size+1):
-        kmers.append(sequence[start:start+kmer_size])
+        kmer = sequence[start:start+kmer_size]
+        # check if reversed is alphabetically lower
+        kmers.append(sorted([kmer, kmer[::-1]])[0])
     return kmers
 
 

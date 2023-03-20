@@ -23,7 +23,7 @@ class TestKmer(unittest.TestCase):
     def test_sequence_to_kmer(self):
         size = 3
         sequence = "ATCGT"
-        expected = ["ATC", "TCG", "CGT"]
+        expected = ["ATC", "GCT", "CGT"]
         got = KMer.sequence_to_kmer(sequence, size)
         self.assertEqual(expected, got)
 
@@ -53,21 +53,21 @@ class TestKmer(unittest.TestCase):
         self.assertEqual(expected, got)
 
     def test_find_group_kmers(self):
-        kmers = [string_to_two_bit(x) for x in ["ATC", "TCG", "CGG", "GGG"]]
+        kmers = KMer.sequence_to_kmer(string_to_two_bit("ATCGGG"), 3)
         kmer_two = KMer.sequence_to_kmer(string_to_two_bit("GATCGATC"), 3)
         expected = [[0,0,1],[1,5,2]]
         got = KMer.find_group_kmers(kmers, kmer_two, 0)
         self.assertEqual(expected, got)
 
     def test_find_group_kmers_mid_position(self):
-        kmers = [string_to_two_bit(x) for x in ["ATC", "TCG", "CGG", "GGG"]]
+        kmers = KMer.sequence_to_kmer(string_to_two_bit("ATCGGG"), 3)
         kmer_two = KMer.sequence_to_kmer(string_to_two_bit("GATCGATC"), 3)
         expected = [[100,100,101],[1,5,2]]
         got = KMer.find_group_kmers(kmers, kmer_two, 100)
         self.assertEqual(expected, got)
 
     def test_multi_process(self):
-        kmers = [string_to_two_bit(x) for x in ["ATC", "TCG"]]
+        kmers = KMer.sequence_to_kmer(string_to_two_bit("ATCG"), 3)
         kmer_two = KMer.sequence_to_kmer(string_to_two_bit("GATCGATC"), 3)
         threads = 4
         expected = [[0, 0, 1], [1, 5, 2]]
@@ -75,7 +75,7 @@ class TestKmer(unittest.TestCase):
         self.assertEqual(expected, got)
 
     def test_multi_process_more_kmers(self):
-        kmers = [string_to_two_bit(x) for x in ["ATC", "TCG", "CGG", "GGG"]]
+        kmers = KMer.sequence_to_kmer(string_to_two_bit("ATCGGG"), 3)
         kmer_two = KMer.sequence_to_kmer(string_to_two_bit("GATCGATC"), 3)
         cores = 4
         expected = [[0, 0, 1], [1, 5, 2]]
@@ -83,7 +83,7 @@ class TestKmer(unittest.TestCase):
         self.assertEqual(expected, got)
 
     def test_multi_process_match_in_last(self):
-        kmers = [string_to_two_bit(x) for x in ["ATC", "TCG", "CGG", "GGG", "GGG", "GGA", "GAT"]]
+        kmers = KMer.sequence_to_kmer(string_to_two_bit("ATCGGGGAT"), 3)
         kmer_two = KMer.sequence_to_kmer(string_to_two_bit("GATCGATC"), 3)
         cores = 4
         expected = [[0, 0, 1, 6, 6], [1, 5, 2, 0, 4]]
