@@ -10,13 +10,6 @@ from Scripts.TwoBitEncoding import string_to_two_bit
 
 class TestKmer(unittest.TestCase):
 
-     # def test_find_kmer(self):
-     #    kmer = bytearray(b'\x03\x02\x01\x00')
-     #    sequence = bytearray(b'\x03\x02\x01\x00\x00\x00\x02\x03\x02\x01')
-     #    expected = [0, 7]
-     #    got = KMer.find_kmer(kmer, sequence)
-     #    self.assertEqual(expected, got)
-
     def test_find_kmer_compressed(self):
         kmer = bytearray(b'\x03\x03\x03')
         sequence = bytearray(b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'

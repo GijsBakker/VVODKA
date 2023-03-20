@@ -97,7 +97,7 @@ def main(args):
     print("Making plots")
 
     for position in positions:
-        fig, file = CreateDotPlot.create_dot_plot(position[0], position[1], position[2], position[3])
+        fig, file = CreateDotPlot.create_dot_plot(position[0], position[1], position[2], position[3], kmer_size)
         fig.savefig(file, dpi=300)
 
     # works only if multiple plots can be made and is ugly

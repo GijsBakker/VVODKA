@@ -3,6 +3,11 @@
 """
 KMer.py: Is used to find k-mers in genomes
 """
+
+__author__ = "Gijs Bakker"
+__version__ = 0.1
+
+
 import math
 import re
 import time
@@ -18,7 +23,6 @@ def find_kmer(k_mer, sequence):
     :return: a list of the positions of the found kmers
     """
     pattern = re.compile(bytes(k_mer))
-    # return [match.start() for match in re.finditer(k_mer, sequence)]
     return [match.start() for match in pattern.finditer(sequence)]
 
 
@@ -32,6 +36,20 @@ def sequence_to_kmer(sequence, kmer_size):
     kmers = []
     for start in range(len(sequence)-kmer_size+1):
         kmers.append(sequence[start:start+kmer_size])
+    return kmers
+
+
+def sequence_to_kmer_dict(sequence, kmer_size):
+    # uses dictionary since then you don't have to have N kmers but a max of 4^kmer_size
+    # and later you can easily spot which kmer occurs often for removing non informative kmers
+    kmers = {}
+    for start in range(len(sequence) - kmer_size+1):
+        kmer = sequence[start:start+kmer_size]
+        if kmers.get(kmer):
+            kmers[kmer] = kmers.get(kmer) + [start]
+
+        else:
+            kmers[kmer] = [start]
     return kmers
 
 
