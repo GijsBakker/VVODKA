@@ -15,8 +15,9 @@ class TestKmer(unittest.TestCase):
         sequence = bytearray(b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
                              b'\x00\x00\x00\x00\x00\x03\x03\x03\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
                              b'\x00\x03\x03\x03\x00\x00\x00\x00\x00')
+        kmers_two = KMer.sequence_to_kmer(sequence, 3)
         expected = [27, 45]
-        got = KMer.find_kmer(kmer, sequence)
+        got = KMer.find_kmer(kmer, kmers_two)
         self.assertEqual(expected, got)
 
     def test_sequence_to_kmer(self):
@@ -40,7 +41,7 @@ class TestKmer(unittest.TestCase):
         #sequence_two = "GATCG"
         sequence_two = bytearray(b'\x00\x03\x02\x01\x00')
         expected = [[0, 1], [1, 2]]
-        got, time_one, time_two = KMer.find_overlapping_kmers(sequence, sequence_two, size, cores=8)
+        got = KMer.find_overlapping_kmers(sequence, sequence_two, size, cores=8)
         self.assertEqual(expected, got)
 
     def test_find_multiple_overlapping_kmers(self):
@@ -48,45 +49,45 @@ class TestKmer(unittest.TestCase):
         sequence = string_to_two_bit("ATCG")
         sequence_two = string_to_two_bit("GATCGATC")
         expected = [[0, 0, 1], [1, 5, 2]]
-        got, time_one, time_two = KMer.find_overlapping_kmers(sequence, sequence_two, size, cores=8)
+        got = KMer.find_overlapping_kmers(sequence, sequence_two, size, cores=8)
         self.assertEqual(expected, got)
 
     def test_find_group_kmers(self):
         kmers = [string_to_two_bit(x) for x in ["ATC", "TCG", "CGG", "GGG"]]
-        sequence = string_to_two_bit("GATCGATC")
+        kmer_two = KMer.sequence_to_kmer(string_to_two_bit("GATCGATC"), 3)
         expected = [[0,0,1],[1,5,2]]
-        got = KMer.find_group_kmers(kmers, sequence, 0)
+        got = KMer.find_group_kmers(kmers, kmer_two, 0)
         self.assertEqual(expected, got)
 
     def test_find_group_kmers_mid_position(self):
         kmers = [string_to_two_bit(x) for x in ["ATC", "TCG", "CGG", "GGG"]]
-        sequence = string_to_two_bit("GATCGATC")
+        kmer_two = KMer.sequence_to_kmer(string_to_two_bit("GATCGATC"), 3)
         expected = [[100,100,101],[1,5,2]]
-        got = KMer.find_group_kmers(kmers, sequence, 100)
+        got = KMer.find_group_kmers(kmers, kmer_two, 100)
         self.assertEqual(expected, got)
 
     def test_multi_process(self):
         kmers = [string_to_two_bit(x) for x in ["ATC", "TCG"]]
-        sequence = string_to_two_bit("GATCGATC")
+        kmer_two = KMer.sequence_to_kmer(string_to_two_bit("GATCGATC"), 3)
         threads = 4
         expected = [[0, 0, 1], [1, 5, 2]]
-        got = KMer.multi_process(threads, kmers, sequence)
+        got = KMer.multi_process(threads, kmers, kmer_two)
         self.assertEqual(expected, got)
 
     def test_multi_process_more_kmers(self):
         kmers = [string_to_two_bit(x) for x in ["ATC", "TCG", "CGG", "GGG"]]
-        sequence = string_to_two_bit("GATCGATC")
+        kmer_two = KMer.sequence_to_kmer(string_to_two_bit("GATCGATC"), 3)
         cores = 4
         expected = [[0, 0, 1], [1, 5, 2]]
-        got = KMer.multi_process(cores, kmers, sequence)
+        got = KMer.multi_process(cores, kmers, kmer_two)
         self.assertEqual(expected, got)
 
     def test_multi_process_match_in_last(self):
         kmers = [string_to_two_bit(x) for x in ["ATC", "TCG", "CGG", "GGG", "GGG", "GGA", "GAT"]]
-        sequence = string_to_two_bit("GATCGATC")
+        kmer_two = KMer.sequence_to_kmer(string_to_two_bit("GATCGATC"), 3)
         cores = 4
         expected = [[0, 0, 1, 6, 6], [1, 5, 2, 0, 4]]
-        got = KMer.multi_process(cores, kmers, sequence)
+        got = KMer.multi_process(cores, kmers, kmer_two)
         self.assertEqual(expected, got)
 
 
