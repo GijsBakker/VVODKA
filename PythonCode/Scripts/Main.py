@@ -2,11 +2,11 @@
 import pyfastx
 
 usage = """
-Main.py: main.py is used to handle the user input, call the right functions and return the final output
+Main.py: Main.py is used to handle the user input, call the right functions and return the final output
 
 Usage:
-main.py -k <kmerSize> -c <cores> [-s] (-f <file>) ... [-m <merged_file>] ...
-main.py (-h | --help | --version)
+Main.py -k <kmerSize> -c <cores> [-s] (-f <file>) ... [-m <merged_file>] ...
+Main.py (-h | --help | --version)
 """
 
 __author__ = "Gijs Bakker"
@@ -16,26 +16,23 @@ from docopt import docopt
 import FastaSequence
 import CreateDotPlot
 import KMer
+import KMerDict
 import ReadFasta
 import time
 import os
 
 RUN = 1
-SETTINGS = "Combined Arabidopsis"
-FILE = "../Logs/log2.txt"
+SETTINGS = "List"
+FILE = "../Logs/log3.txt"
 
 
-def write_time(start_time, sequences_time, kmer_list_time, find_overlap_time, stop_time, cores, kmer, filenames):
+def write_time(start_time, stop_time, cores, kmer, filenames):
     f = open(FILE, "a")
     files = ", ".join([os.path.basename(os.path.normpath(file)) for file in filenames])
 
     f.write(f"\n{SETTINGS}; cores: {cores}; kmer length: {kmer}\n")
-    f.write(f"Start Time {start_time}\n")
-    f.write(f"Time to get sequences {sequences_time - start_time}s.\n")
-    f.write(f"Time to get kmers {kmer_list_time - sequences_time}s.\n")
-    f.write(f"Time to get overlap {find_overlap_time - kmer_list_time}s.\n")
-    f.write(f"Time to Plot {stop_time - find_overlap_time}s.\n")
-    f.write(f"Stop Time {stop_time}\n")
+    f.write(f"files: {files}\n")
+    f.write(f"Time {stop_time - start_time}\n")
     f.close()
 
 
@@ -81,6 +78,8 @@ def main(args):
 
     positions = []
 
+    start_time = time.time()
+
     # find all overlapping k-mers
     while len(indexes) > start:
         for i in indexes[start:len(indexes)]:
@@ -92,6 +91,9 @@ def main(args):
                              + [sequences[first].name, sequences[i].name])
 
         indexes = indexes[1:len(indexes)]
+
+    stop_time = time.time()
+    #write_time(start_time, stop_time, cores, kmer_size, files)
 
     # create plots
     print("Making plots")

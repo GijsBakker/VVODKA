@@ -13,6 +13,7 @@ import re
 import time
 
 import multiprocessing as mp
+from Scripts import Main
 
 
 def find_kmer(k_mer, kmers_two):
@@ -23,8 +24,6 @@ def find_kmer(k_mer, kmers_two):
     :return: a list of the positions of the found kmers
     """
     return [idx for idx, value in enumerate(kmers_two) if value == k_mer]
-    # pattern = re.compile(bytes(k_mer))
-    # return [match.start() for match in pattern.finditer(kmers_two)]
 
 
 def sequence_to_kmer(sequence, kmer_size):
@@ -39,20 +38,6 @@ def sequence_to_kmer(sequence, kmer_size):
         kmer = sequence[start:start+kmer_size]
         # check if reversed is alphabetically lower
         kmers.append(sorted([kmer, kmer[::-1]])[0])
-    return kmers
-
-
-def sequence_to_kmer_dict(sequence, kmer_size):
-    # uses dictionary since then you don't have to have N kmers but a max of 4^kmer_size
-    # and later you can easily spot which kmer occurs often for removing non informative kmers
-    kmers = {}
-    for start in range(len(sequence) - kmer_size+1):
-        kmer = sequence[start:start+kmer_size]
-        if kmers.get(kmer):
-            kmers[kmer] = kmers.get(kmer) + [start]
-
-        else:
-            kmers[kmer] = [start]
     return kmers
 
 
