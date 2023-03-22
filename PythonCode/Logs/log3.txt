@@ -5,3 +5,39 @@ Time 44.860300064086914
 List; cores: 8; kmer length: 15
 files: emale04.fna
 Time 47.13088536262512
+
+All; cores: 8; kmer length: 15
+files: emale04.fna
+Time 50.36999177932739
+
+All lowered alpha.; cores: 8; kmer length: 10
+files: emale04.fna
+Time 51.55198955535889
+
+All lowered alpha.; cores: 8; kmer length: 10
+files: emale04.fna
+Time 52.749306201934814
+
+All lowered alpha.; cores: 8; kmer length: 10
+files: emale04.fna
+Time 50.1723735332489
+
+All lowered alpha.; cores: 8; kmer length: 5
+files: emale04.fna
+Time 134.26998257637024
+
+All lowered alpha.; cores: 8; kmer length: 9
+files: emale04.fna
+Time 54.779948472976685
+
+All lowered alpha.; cores: 8; kmer length: 5
+files: emale04.fna
+Time 133.86785554885864
+
+All lowered alpha.; cores: 8; kmer length: 9
+files: emale04.fna
+Time 56.91499352455139
+
+All lowered alpha.; cores: 8; kmer length: 9
+files: emale04.fna
+Time 53.32973766326904

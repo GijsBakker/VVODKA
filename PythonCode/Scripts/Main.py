@@ -22,7 +22,7 @@ import time
 import os
 
 RUN = 1
-SETTINGS = "List"
+SETTINGS = "All lowered alpha."
 FILE = "../Logs/log3.txt"
 
 
@@ -41,6 +41,8 @@ def main(args):
     This validates all given arguments
     :param args: docopt arguments
     """
+    start_time = time.time()
+
     kmer_size = int(args['<kmerSize>'])
     files = args['<file>']
     cores = int(args['<cores>'])
@@ -78,8 +80,6 @@ def main(args):
 
     positions = []
 
-    start_time = time.time()
-
     # find all overlapping k-mers
     while len(indexes) > start:
         for i in indexes[start:len(indexes)]:
@@ -92,9 +92,6 @@ def main(args):
 
         indexes = indexes[1:len(indexes)]
 
-    stop_time = time.time()
-    #write_time(start_time, stop_time, cores, kmer_size, files)
-
     # create plots
     print("Making plots")
 
@@ -102,10 +99,8 @@ def main(args):
         fig, file = CreateDotPlot.create_dot_plot(position[0], position[1], position[2], position[3], kmer_size)
         fig.savefig(file, dpi=300)
 
-    # works only if multiple plots can be made and is ugly
-    # # creating one plot
-    # fig = CreateDotPlot.create_combined_plots(positions, "Plots")
-    # fig.savefig("../Results/Test.png", dpi=300)
+    stop_time = time.time()
+    write_time(start_time, stop_time, cores, kmer_size, files)
 
 
 if __name__ == '__main__':
