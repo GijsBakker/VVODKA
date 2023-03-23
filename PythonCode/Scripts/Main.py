@@ -16,7 +16,6 @@ from docopt import docopt
 import FastaSequence
 import CreateDotPlot
 import KMer
-import KMerDict
 import ReadFasta
 import time
 import os
@@ -100,7 +99,7 @@ def main(args):
         fig.savefig(file, dpi=300)
 
     stop_time = time.time()
-    write_time(start_time, stop_time, cores, kmer_size, files)
+    # write_time(start_time, stop_time, cores, kmer_size, files)
 
 
 if __name__ == '__main__':

@@ -13,7 +13,59 @@ import re
 import time
 
 import multiprocessing as mp
-from Scripts import Main
+
+
+def kmers_in_sequence(x_positions, y_positions, number=10, margin=2):
+    """
+    This function removes all found kmers that are not a sequence of *number kmers. They can have *margin gaps
+    :param x_positions: A list of x positions of the found kmers. First element of Y should point to first element of X
+    :param y_positions: A list of y positions of the found kmers. First element of X should point to first element of Y
+    :param number: The number of kmers that need to be in sequence for it not to be removed
+    :param margin: The amount of gaps allowed in this sequence of kmers
+    :return: A list of a list of x positions and a list of y positions
+    """
+    # TODO Right now only allows sequences with gaps. A shift upwards halfway is not recognized. (insertions or
+    #  deletions are not recognized, only punt mutations)
+
+    y_sequence = []
+    x_sequence = []
+
+    # loop over all x_positions
+    for index, x in enumerate(x_positions):
+        current_y = y_positions[index]
+        misses = 0
+
+        for i in range(number-1):     # should check if x+i exist for range given number
+            i += 1
+            if misses > margin:
+                break   # Exceeded margin no need to check further
+
+            amount = x_positions.count(x+i)
+            if amount:       # check if x[x+i] exists
+                # should get corresponding y
+                # index only returns first index, should check all
+                count = 0
+                found = False
+                current_index = 0
+                while count < amount:
+                    current_index = x_positions.index(x+i, current_index+1)
+                    next_y = y_positions[current_index]
+                    count += 1
+                    # should check if y = one bigger or smaller than the previous y.
+                    if next_y == current_y+1 or next_y == current_y - 1:
+                        current_y = next_y
+                        found = True
+
+                if not found:
+                    misses += 1
+            else:
+                misses += 1    # should mark an error
+
+        if misses <= margin:
+            x_sequence.append(x)    # can mark this kmer
+            y_sequence.append(y_positions[index])
+
+    return [x_sequence, y_sequence]
 
 
 def find_kmer(k_mer, kmers_two):
@@ -117,5 +169,6 @@ def find_overlapping_kmers(sequence_one, sequence_two, size, cores):
 
     print("Searching for matches")
     positions_x, positions_y = multi_process(cores, kmer_list, kmer_list_two)
+    positions_x, positions_y = kmers_in_sequence(positions_x, positions_y)
     overlap_positions = [positions_x, positions_y]
     return overlap_positions
