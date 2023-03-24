@@ -13,6 +13,7 @@ __author__ = "Gijs Bakker"
 __version__ = 0.1
 
 from docopt import docopt
+import InlineKmer
 import FastaSequence
 import CreateDotPlot
 import KMer
@@ -21,7 +22,7 @@ import time
 import os
 
 RUN = 1
-SETTINGS = "sequence of kmers"
+SETTINGS = "Testing inline"
 FILE = "../Logs/log3.txt"
 
 
@@ -86,7 +87,9 @@ def main(args):
             print(f"Matching {sequences[first].name} against {sequences[i].name}")
 
             print("Finding overlapping sequences")
-            positions.append(KMer.find_overlapping_kmers(sequences[first].seq, sequences[i].seq, kmer_size, cores)
+            # positions.append(KMer.find_overlapping_kmers(sequences[first].seq, sequences[i].seq, kmer_size, cores)
+            #                  + [sequences[first].name, sequences[i].name])
+            positions.append(InlineKmer.find_overlapping_kmers(sequences[first].seq, sequences[i].seq, kmer_size)
                              + [sequences[first].name, sequences[i].name])
 
         indexes = indexes[1:len(indexes)]

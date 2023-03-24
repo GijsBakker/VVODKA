@@ -49,3 +49,11 @@ Time 195.84304356575012
 sequence of kmers; cores: 8; kmer length: 9
 files: emale04.fna
 Time 360.1007328033447
+
+Testing inline; cores: 8; kmer length: 10
+files: emale04.fna
+Time 16.297731161117554
+
+Testing inline; cores: 8; kmer length: 10
+files: emale04.fna
+Time 16.018582105636597
