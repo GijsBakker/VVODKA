@@ -41,3 +41,11 @@ Time 56.91499352455139
 All lowered alpha.; cores: 8; kmer length: 9
 files: emale04.fna
 Time 53.32973766326904
+
+sequence of kmers; cores: 8; kmer length: 10
+files: emale04.fna
+Time 195.84304356575012
+
+sequence of kmers; cores: 8; kmer length: 9
+files: emale04.fna
+Time 360.1007328033447

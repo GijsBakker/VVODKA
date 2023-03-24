@@ -15,7 +15,7 @@ import time
 import multiprocessing as mp
 
 
-def kmers_in_sequence(x_positions, y_positions, number=10, margin=2):
+def kmers_in_sequence(x_positions, y_positions, number=5, margin=1):
     """
     This function removes all found kmers that are not a sequence of *number kmers. They can have *margin gaps
     :param x_positions: A list of x positions of the found kmers. First element of Y should point to first element of X
@@ -26,6 +26,8 @@ def kmers_in_sequence(x_positions, y_positions, number=10, margin=2):
     """
     # TODO Right now only allows sequences with gaps. A shift upwards halfway is not recognized. (insertions or
     #  deletions are not recognized, only punt mutations)
+    # TODO add this functionality in line
+    # TODO Maybe recursive
 
     y_sequence = []
     x_sequence = []
@@ -89,7 +91,7 @@ def sequence_to_kmer(sequence, kmer_size):
     for start in range(len(sequence)-kmer_size+1):
         kmer = sequence[start:start+kmer_size]
         # check if reversed is alphabetically lower
-        kmers.append(sorted([kmer, kmer[::-1]])[0])
+        kmers.append(min(kmer, kmer[::-1]))
     return kmers
 
 
@@ -169,6 +171,7 @@ def find_overlapping_kmers(sequence_one, sequence_two, size, cores):
 
     print("Searching for matches")
     positions_x, positions_y = multi_process(cores, kmer_list, kmer_list_two)
+    print("Finding in sequence")
     positions_x, positions_y = kmers_in_sequence(positions_x, positions_y)
     overlap_positions = [positions_x, positions_y]
     return overlap_positions

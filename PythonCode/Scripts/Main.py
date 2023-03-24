@@ -21,7 +21,7 @@ import time
 import os
 
 RUN = 1
-SETTINGS = "All lowered alpha."
+SETTINGS = "sequence of kmers"
 FILE = "../Logs/log3.txt"
 
 
@@ -99,7 +99,7 @@ def main(args):
         fig.savefig(file, dpi=300)
 
     stop_time = time.time()
-    # write_time(start_time, stop_time, cores, kmer_size, files)
+    write_time(start_time, stop_time, cores, kmer_size, files)
 
 
 if __name__ == '__main__':
