@@ -22,15 +22,16 @@ import time
 import os
 
 RUN = 1
-SETTINGS = "Testing inline"
+SETTINGS = "Testing inline Without correct inverted repeats"
 FILE = "../Logs/log3.txt"
 
 
-def write_time(start_time, stop_time, cores, kmer, filenames):
+def write_time(start_time, stop_time, cores, kmer, filenames, error_margin, kmer_chain):
     f = open(FILE, "a")
     files = ", ".join([os.path.basename(os.path.normpath(file)) for file in filenames])
 
-    f.write(f"\n{SETTINGS}; cores: {cores}; kmer length: {kmer}\n")
+    f.write(f"\n{SETTINGS}; cores: {cores}; kmer length: {kmer}; error_margin: {error_margin};\n"
+            f"kmer_chain: {kmer_chain}")
     f.write(f"files: {files}\n")
     f.write(f"Time {stop_time - start_time}\n")
     f.close()
@@ -69,7 +70,6 @@ def main(args):
     if not on_self and len(sequences) <= 1:
         print("Only one file with one sequence given. Auto plotted on itself")
         on_self = True
-
     # should compare all files
     indexes = [i for i in range(len(sequences))]
 
@@ -104,7 +104,7 @@ def main(args):
         fig.savefig(file, dpi=300)
 
     stop_time = time.time()
-    write_time(start_time, stop_time, cores, kmer_size, files)
+    write_time(start_time, stop_time, cores, kmer_size, files, max_misses, wanted_length)
 
 
 if __name__ == '__main__':

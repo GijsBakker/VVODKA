@@ -11,6 +11,27 @@ def find_all(sub, a_str):
         start += len(sub)   # use start += 1 to find overlapping matches
 
 
+def invert_kmer(kmer):
+
+    #\X01 : C
+    #\X02 : G
+    #\X03 : T
+    #\X00 : A
+
+    bin_dict = {'A': 0b00, 'C': 0b01, 'G': 0b10, 'T': 0b11}
+    invert_dict = {
+        3: 0b00,
+        0: 0b11,
+        1: 0b10,
+        2: 0b01
+    }
+    inverted_kmer = bytearray('', encoding='utf-8')
+    for byte in kmer:
+        inverted_kmer.append(invert_dict[byte])
+
+    return inverted_kmer
+
+
 def find_overlap_kmers(seq1, seq2, kmer_length, wanted_length, max_misses):
     # TODO object instead of list
     # TODO shorten code if possible
@@ -20,6 +41,7 @@ def find_overlap_kmers(seq1, seq2, kmer_length, wanted_length, max_misses):
     for x_pos in range(len(seq1) - kmer_length + 1):
         kmer = seq1[x_pos:x_pos + kmer_length]
         kmer_rev = kmer[::-1]
+        # kmer_rev = invert_kmer(kmer[::-1])
         y_kmers = []
         x_kmers = []
         if kmer in seq2:
@@ -55,24 +77,6 @@ def find_overlap_kmers(seq1, seq2, kmer_length, wanted_length, max_misses):
             possible_kmers.append([kmer, (kmer[0]+1, kmer[1]-1), 0, 1, -1])
 
     return final_kmers
-
-
-# def find_overlap_kmers(seq1, seq2, kmer_length, wanted_length, max_misses):
-#     found_kmer_list = []
-#
-#     for x_pos in range(len(seq1) - kmer_length + 1):
-#         kmer = seq1[x_pos:x_pos + kmer_length]
-#         kmer_rev = kmer[::-1]
-#         if kmer in seq2:
-#             y_kmers = [y_pos for y_pos in find_all(kmer, seq2)]
-#             x_kmers = [x_pos for y_pos in range(len(y_kmers))]
-#             found_kmer_list += list(zip(x_kmers, y_kmers))
-#         if kmer_rev in seq2 and kmer != kmer_rev:
-#             y_kmers = [y_pos for y_pos in find_all(kmer_rev, seq2)]
-#             x_kmers = [x_pos for y_pos in range(len(y_kmers))]
-#             found_kmer_list += list(zip(x_kmers, y_kmers))
-#
-#     return found_kmer_list
 
 
 def unzip_kmers(kmer_list):
