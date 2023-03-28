@@ -40,8 +40,7 @@ def find_overlap_kmers(seq1, seq2, kmer_length, wanted_length, max_misses):
 
     for x_pos in range(len(seq1) - kmer_length + 1):
         kmer = seq1[x_pos:x_pos + kmer_length]
-        kmer_rev = kmer[::-1]
-        # kmer_rev = invert_kmer(kmer[::-1])
+        kmer_rev = invert_kmer(kmer[::-1])
         y_kmers = []
         x_kmers = []
         if kmer in seq2:
