@@ -5,7 +5,7 @@ usage = """
 Main.py: Main.py is used to handle the user input, call the right functions and return the final output
 
 Usage:
-Main.py -k <kmerSize> -c <cores> [-s] (-f <file>) ... [-m <merged_file>] ...
+Main.py -k <kmerSize> -c <cores> -er <ErrorRate> -l <kmerChain> [-s] (-f <file>) ... [-m <merged_file>] ...
 Main.py (-h | --help | --version)
 """
 
@@ -48,8 +48,8 @@ def main(args):
     cores = int(args['<cores>'])
     on_self = args['-s']
     merged_files = args['<merged_file>']
-    max_misses = 2
-    wanted_length = 10
+    max_misses = int(args['<ErrorRate>'])
+    wanted_length = int(args['<kmerChain>'])
 
     print("Extracting Sequences")
     # TODO Can be its own function until sequences is filled
@@ -89,8 +89,6 @@ def main(args):
             print(f"Matching {sequences[first].name} against {sequences[i].name}")
 
             print("Finding overlapping sequences")
-            # positions.append(KMer.find_overlapping_kmers(sequences[first].seq, sequences[i].seq, kmer_size, cores)
-            #                  + [sequences[first].name, sequences[i].name])
             positions.append(InlineKmer.find_overlapping_kmers(sequences[first].seq, sequences[i].seq, kmer_size,
                                                                wanted_length, max_misses)
                              + [sequences[first].name, sequences[i].name])
@@ -101,7 +99,8 @@ def main(args):
     print("Making plots")
 
     for position in positions:
-        fig, file = CreateDotPlot.create_dot_plot(position[0], position[1], position[2], position[3], kmer_size)
+        fig, file = CreateDotPlot.create_dot_plot(position[0], position[1], position[2], position[3], kmer_size,
+                                                  max_misses, wanted_length)
         fig.savefig(file, dpi=300)
 
     stop_time = time.time()

@@ -30,19 +30,24 @@ def find_overlap_kmers(seq1, seq2, kmer_length, wanted_length, max_misses):
             x_kmers += [x_pos for y_pos in range(len(y_kmers))]
 
         new_kmers = list(zip(x_kmers, y_kmers))
-
+        to_be_deleted = []
         # Check per existing kmer if a newfound kmer fits on it
         for kmer in possible_kmers:
             if not kmer[1] in new_kmers:     # if not found add one miss
                 kmer[2] += 1    # +1 misses
+
             kmer[1] = (kmer[1][0] + 1, kmer[1][1] + kmer[4])  # update next wanted kmer.
             kmer[3] += 1  # +1 len
 
             if kmer[2] > max_misses:
-                possible_kmers.remove(kmer)
+                to_be_deleted.append(kmer)
             elif kmer[3] >= wanted_length:
                 final_kmers.append(kmer[0])
-                possible_kmers.remove(kmer)
+                to_be_deleted.append(kmer)
+
+        # remove to be deleted kmers
+        for kmer in to_be_deleted:
+            possible_kmers.remove(kmer)
 
         # Add new kmer up and down
         for kmer in new_kmers:
@@ -52,7 +57,7 @@ def find_overlap_kmers(seq1, seq2, kmer_length, wanted_length, max_misses):
     return final_kmers
 
 
-# def find_overlap_kmers(seq1, seq2, kmer_length):
+# def find_overlap_kmers(seq1, seq2, kmer_length, wanted_length, max_misses):
 #     found_kmer_list = []
 #
 #     for x_pos in range(len(seq1) - kmer_length + 1):

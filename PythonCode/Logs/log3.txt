@@ -101,3 +101,139 @@ Time 16.183265209197998
 Testing inline; cores: 8; kmer length: 10
 files: emale04.fna
 Time 15.05165147781372
+
+Testing inline; cores: 8; kmer length: 20
+files: emale04.fna
+Time 17.4914870262146
+
+Testing inline; cores: 8; kmer length: 50
+files: emale04.fna
+Time 19.340081453323364
+
+Testing inline; cores: 8; kmer length: 100
+files: emale04.fna
+Time 19.26209020614624
+
+Testing inline; cores: 8; kmer length: 200
+files: emale04.fna
+Time 18.780393600463867
+
+Testing inline; cores: 1; kmer length: 10
+files: testOne.fa
+Time 0.32776427268981934
+
+Testing inline; cores: 1; kmer length: 10
+files: testOne.fa
+Time 0.3656325340270996
+
+Testing inline; cores: 1; kmer length: 10
+files: testOne.fa
+Time 0.31558775901794434
+
+Testing inline; cores: 1; kmer length: 10
+files: testOne.fa
+Time 0.7478845119476318
+
+Testing inline; cores: 1; kmer length: 10
+files: testOne.fa
+Time 1.2773163318634033
+
+Testing inline; cores: 1; kmer length: 10
+files: testOne.fa
+Time 1.8431646823883057
+
+Testing inline; cores: 1; kmer length: 10
+files: testOne.fa
+Time 1.7039048671722412
+
+Testing inline; cores: 1; kmer length: 10
+files: testOne.fa
+Time 2.637441396713257
+
+Testing inline; cores: 1; kmer length: 10
+files: testOne.fa
+Time 0.32949161529541016
+
+Testing inline; cores: 1; kmer length: 10
+files: testOne.fa
+Time 0.33597254753112793
+
+Testing inline; cores: 1; kmer length: 10
+files: testOne.fa
+Time 0.3304464817047119
+
+Testing inline; cores: 1; kmer length: 10
+files: testOne.fa
+Time 0.3348264694213867
+
+Testing inline; cores: 1; kmer length: 10
+files: testOne.fa
+Time 0.33432698249816895
+
+Testing inline; cores: 1; kmer length: 10
+files: testOne.fa
+Time 0.3298492431640625
+
+Testing inline; cores: 1; kmer length: 10
+files: testOne.fa
+Time 0.35591578483581543
+
+Testing inline; cores: 1; kmer length: 10
+files: testOne.fa
+Time 0.3807668685913086
+
+Testing inline; cores: 8; kmer length: 15
+files: emale04.fna
+Time 19.772974491119385
+
+Testing inline; cores: 8; kmer length: 8
+files: emale04.fna
+Time 17.885435342788696
+
+Testing inline; cores: 8; kmer length: 8
+files: emale04.fna
+Time 8.138603687286377
+
+Testing inline; cores: 8; kmer length: 10
+files: emale04.fna
+Time 7.768383264541626
+
+Testing inline; cores: 8; kmer length: 10
+files: emale04.fna
+Time 7.73345947265625
+
+Testing inline; cores: 8; kmer length: 10
+files: emale04.fna
+Time 7.456756353378296
+
+Testing inline; cores: 8; kmer length: 10
+files: emale04.fna
+Time 15.937834978103638
+
+Testing inline; cores: 8; kmer length: 10
+files: emale04.fna
+Time 15.945271968841553
+
+Testing inline; cores: 1; kmer length: 5
+files: testOne.fa
+Time 0.6782381534576416
+
+Testing inline; cores: 1; kmer length: 5
+files: testAll_short.fa
+Time 0.3311128616333008
+
+Testing inline; cores: 1; kmer length: 5
+files: testAll_shortTwo.fa
+Time 0.33423852920532227
+
+Testing inline; cores: 8; kmer length: 10
+files: emale04.fna
+Time 16.940770626068115
+
+Testing inline; cores: 8; kmer length: 10
+files: emale04.fna
+Time 17.034247636795044
+
+Testing inline; cores: 8; kmer length: 10
+files: emale04.fna
+Time 16.335599422454834
