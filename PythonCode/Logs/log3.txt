@@ -73,3 +73,31 @@ Time 25.288983583450317
 Testing inline; cores: 8; kmer length: 15
 files: emale04.fna
 Time 16.837843894958496
+
+Testing inline; cores: 1; kmer length: 10
+files: testOne.fa, testTwo.fa
+Time 0.4323232173919678
+
+Testing inline; cores: 8; kmer length: 15
+files: emale04.fna
+Time 16.55461072921753
+
+Testing inline; cores: 8; kmer length: 15
+files: emale04.fna, mavirus.fna
+Time 23.987839221954346
+
+Testing inline; cores: 8; kmer length: 15
+files: emale04.fna
+Time 15.439311742782593
+
+Testing inline; cores: 8; kmer length: 10
+files: emale04.fna
+Time 14.852081537246704
+
+Testing inline; cores: 8; kmer length: 15
+files: emale04.fna
+Time 16.183265209197998
+
+Testing inline; cores: 8; kmer length: 10
+files: emale04.fna
+Time 15.05165147781372

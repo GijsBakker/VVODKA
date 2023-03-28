@@ -48,6 +48,8 @@ def main(args):
     cores = int(args['<cores>'])
     on_self = args['-s']
     merged_files = args['<merged_file>']
+    max_misses = 2
+    wanted_length = 10
 
     print("Extracting Sequences")
     # TODO Can be its own function until sequences is filled
@@ -89,7 +91,8 @@ def main(args):
             print("Finding overlapping sequences")
             # positions.append(KMer.find_overlapping_kmers(sequences[first].seq, sequences[i].seq, kmer_size, cores)
             #                  + [sequences[first].name, sequences[i].name])
-            positions.append(InlineKmer.find_overlapping_kmers(sequences[first].seq, sequences[i].seq, kmer_size)
+            positions.append(InlineKmer.find_overlapping_kmers(sequences[first].seq, sequences[i].seq, kmer_size,
+                                                               wanted_length, max_misses)
                              + [sequences[first].name, sequences[i].name])
 
         indexes = indexes[1:len(indexes)]
