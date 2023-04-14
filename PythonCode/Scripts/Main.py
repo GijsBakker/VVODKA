@@ -4,8 +4,8 @@ usage = """
 Main.py: Main.py is used to handle the user input, call the right functions and return the final output
 
 Usage:
-Main.py -k <kmerSize> -c <cores> [-s] (-f <file>) ... [-m <merged_file>] ...
-Main.py (-h | --help | --version)
+    Main.py -k <kmerSize> -c <cores> -r <dpi> [-s] (-f <file>) ... [-m <merged_file>] ...
+    Main.py (-h | --help | --version)
 """
 
 __author__ = "Gijs Bakker"
@@ -47,6 +47,7 @@ def main(args):
     cores = int(args['<cores>'])
     on_self = args['-s']
     merged_files = args['<merged_file>']
+    dpi = int(args['<dpi>'])
 
     print("Extracting Sequences")
     # TODO Can be its own function until sequences is filled
@@ -95,7 +96,7 @@ def main(args):
 
     for position in positions:
         fig, file = CreateDotPlot.create_dot_plot(position[0], position[1], position[2], position[3], kmer_size)
-        fig.savefig(file, dpi=300)
+        fig.savefig(file, dpi=dpi)
 
     stop_time = time.time()
     # write_time(start_time, stop_time, cores, kmer_size, files, max_misses, wanted_length)

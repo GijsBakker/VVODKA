@@ -34,10 +34,10 @@ def create_dot_plot(positions_x, positions_y, name_one, name_two, kmer_size):
     """
     mpl.use('TkAgg')
     # s is size
-    plt.scatter(positions_x, positions_y, s=25, lw=0, alpha=0.5)
+    plt.scatter(positions_x, positions_y, s=10, lw=0, alpha=0.5)
     plt.ylabel(name_two)
     plt.xlabel(name_one)
-    plt.title(f"Genome dot plot {name_one} against {name_two}. {kmer_size}-mer.")
+    plt.title(f"Genome dot plot {name_one} against {name_two}. {kmer_size}-mer. ")
 
     fig = plt.gcf()
     file = f"../Results/{name_one}-{name_two}.png"
