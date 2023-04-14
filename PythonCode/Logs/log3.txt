@@ -97,3 +97,7 @@ Time 15.99926209449768
 Testing inline Without correct inverted repeats; cores: 8; kmer length: 10; error_margin: 1;
 kmer_chain: 4files: emale04.fna
 Time 15.633697271347046
+
+Testing genome times; cores: 8; kmer length: 10; error_margin: 1;
+kmer_chain: 3files: emale04.fna
+Time 138.61847639083862

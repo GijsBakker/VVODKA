@@ -1,11 +1,10 @@
 #!/usr/bin/python3
-import pyfastx
 
 usage = """
 Main.py: Main.py is used to handle the user input, call the right functions and return the final output
 
 Usage:
-Main.py -k <kmerSize> -c <cores> -er <ErrorRate> -l <kmerChain> [-s] (-f <file>) ... [-m <merged_file>] ...
+Main.py -k <kmerSize> -c <cores> [-s] (-f <file>) ... [-m <merged_file>] ...
 Main.py (-h | --help | --version)
 """
 
@@ -16,13 +15,12 @@ from docopt import docopt
 import InlineKmer
 import FastaSequence
 import CreateDotPlot
-import KMer
 import ReadFasta
 import time
 import os
 
 RUN = 1
-SETTINGS = "Testing inline Without correct inverted repeats"
+SETTINGS = "Testing genome times"
 FILE = "../Logs/log3.txt"
 
 
@@ -49,8 +47,6 @@ def main(args):
     cores = int(args['<cores>'])
     on_self = args['-s']
     merged_files = args['<merged_file>']
-    max_misses = int(args['<ErrorRate>'])
-    wanted_length = int(args['<kmerChain>'])
 
     print("Extracting Sequences")
     # TODO Can be its own function until sequences is filled
@@ -89,8 +85,7 @@ def main(args):
             print(f"Matching {sequences[first].name} against {sequences[i].name}")
 
             print("Finding overlapping sequences")
-            positions.append(InlineKmer.find_overlapping_kmers(sequences[first].seq, sequences[i].seq, kmer_size,
-                                                               wanted_length, max_misses)
+            positions.append(InlineKmer.find_overlapping_kmers(sequences[first].seq, sequences[i].seq, kmer_size)
                              + [sequences[first].name, sequences[i].name])
 
         indexes = indexes[1:len(indexes)]
@@ -99,12 +94,11 @@ def main(args):
     print("Making plots")
 
     for position in positions:
-        fig, file = CreateDotPlot.create_dot_plot(position[0], position[1], position[2], position[3], kmer_size,
-                                                  max_misses, wanted_length)
+        fig, file = CreateDotPlot.create_dot_plot(position[0], position[1], position[2], position[3], kmer_size)
         fig.savefig(file, dpi=300)
 
     stop_time = time.time()
-    write_time(start_time, stop_time, cores, kmer_size, files, max_misses, wanted_length)
+    # write_time(start_time, stop_time, cores, kmer_size, files, max_misses, wanted_length)
 
 
 if __name__ == '__main__':

@@ -4,7 +4,7 @@
 K-merTest: is used to test the functions in the KMer script
 """
 import unittest
-from Scripts import KMer
+from Scripts.Old import KMer
 from Scripts.TwoBitEncoding import string_to_two_bit
 
 

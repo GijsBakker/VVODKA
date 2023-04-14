@@ -15,7 +15,7 @@ import time
 import multiprocessing as mp
 
 
-def kmers_in_sequence(x_positions, y_positions, number=5, margin=1):
+def kmers_in_sequence(x_positions, y_positions, number, margin):
     """
     This function removes all found kmers that are not a sequence of *number kmers. They can have *margin gaps
     :param x_positions: A list of x positions of the found kmers. First element of Y should point to first element of X
@@ -157,7 +157,7 @@ def multi_process(cores, kmers_one, kmers_two):
     return [pos_x, pos_y]
 
 
-def find_overlapping_kmers(sequence_one, sequence_two, size, cores):
+def find_overlapping_kmers(sequence_one, sequence_two, size, cores, wanted_l, max_misses):
     """
     This function finds the overlapping kmers between two sequences.
     :param sequence_one: bytearray of the first sequence
@@ -172,6 +172,6 @@ def find_overlapping_kmers(sequence_one, sequence_two, size, cores):
     print("Searching for matches")
     positions_x, positions_y = multi_process(cores, kmer_list, kmer_list_two)
     print("Finding in sequence")
-    positions_x, positions_y = kmers_in_sequence(positions_x, positions_y)
+    positions_x, positions_y = kmers_in_sequence(positions_x, positions_y, wanted_l, max_misses)
     overlap_positions = [positions_x, positions_y]
     return overlap_positions

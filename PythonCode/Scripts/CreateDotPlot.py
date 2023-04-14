@@ -21,7 +21,7 @@ def create_combined_plots(positions, title):
     return fig
 
 
-def create_dot_plot(positions_x, positions_y, name_one, name_two,kmer_size, error_rate, seq_len):
+def create_dot_plot(positions_x, positions_y, name_one, name_two, kmer_size):
     """
     Creates a dot plot showing the k-mers present in both sequences. The first nucleotide of the duplicate k-mers are
         marked with a dot
@@ -37,8 +37,7 @@ def create_dot_plot(positions_x, positions_y, name_one, name_two,kmer_size, erro
     plt.scatter(positions_x, positions_y, s=25, lw=0, alpha=0.5)
     plt.ylabel(name_two)
     plt.xlabel(name_one)
-    plt.title(f"Genome dot plot {name_one} against {name_two}. {kmer_size}-mer. Misses: {error_rate}. "
-              f"Seq_len: {seq_len}.")
+    plt.title(f"Genome dot plot {name_one} against {name_two}. {kmer_size}-mer.")
 
     fig = plt.gcf()
     file = f"../Results/{name_one}-{name_two}.png"
