@@ -1,0 +1,35 @@
+---
+title: "ReadMinimap2"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+paf = read.table("paperdata.paf", sep="\t")
+ggplot(data=paf, aes(x=V3, xend=V4, y=V8, yend=V9, color=factor(V1))) + geom_segment() + labs(x="Reference coordinate", y="Query coordinate")
+``` 
+
+```{r}
+paf = read.table("paperdataNoM200.paf", sep="\t")
+ggplot(data=paf, aes(x=V3, xend=V4, y=V8, yend=V9, color=factor(V1))) + geom_segment() + labs(x="Reference coordinate", y="Query coordinate")
+``` 
+
+```{r}
+paf = read.table("paperdata13-mer.paf", sep="\t")
+ggplot(data=paf, aes(x=V3, xend=V4, y=V8, yend=V9, color=factor(V1))) + geom_segment() + labs(x="Reference coordinate", y="Query coordinate")
+``` 
+
+
+
+
+
+
+
+
