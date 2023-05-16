@@ -7,20 +7,20 @@ __author__ = "Gijs Bakker"
 __version__ = 0.1
 
 
-def find_all(sub, a_str):
+def find_all(sub, genome):
     """
     This function finds all occurrences of a sub string in another string
     :param sub: a substring
-    :param a_str: a string on which the substring needs to be found
+    :param genome: a string of the genome in which the substring needs to be found
     :return: The coordinates of the substring within the complete string
     """
     start = 0
     while True:
-        start = a_str.find(sub, start)
+        start = genome.find(sub, start)
         if start == -1:
             return
         yield start
-        start += len(sub)   # use start += 1 to find overlapping matches
+        start += 1
 
 
 def invert_kmer(kmer):
