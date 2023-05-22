@@ -13,9 +13,9 @@ Usage:
     
 Options:
     -k <kmer_size>  Specify the size of the k-mer
-    -r <dpi>        Specify the DPI (default: 600)
+    -r <dpi>        Specify the DPI [default: 600]
     -s <self>       Specify if files should be plotted against themselves, use Y to plot against itself or N to not 
-                    plot against itself(default: y)
+                    plot against itself [default: Y]
     <files>...      Specify the files which are plotted against each other
 """
 
@@ -42,14 +42,14 @@ def main(args):
 
     kmer_size = int(args['-k'])
     files = args['<files>']
-    on_self = args['-s'] if args['-s'] else 'Y'
-    dpi = int(args['-r']) if args['-r'] else 600
+    on_self = args['-s']
+    dpi = int(args['-r'])
 
     # Check if arguments are correctly specified
     if on_self.upper() not in ['Y', 'N']:
         print("Please set -s to either Y or N")
         return
-    if on_self.upper() == 'N' and len(files) <=1:
+    if on_self.upper() == 'N' and len(files) <= 1:
         print("No plots to make, make sure that you specify multiple files when using -s=N")
         return
 

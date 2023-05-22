@@ -21,10 +21,11 @@ def create_combined_plots(positions, title):
     return fig
 
 
-def create_dot_plot(positions_x, positions_y, name_one, name_two, kmer_size):
+def create_dot_plot(positions_x, positions_y, name_one, name_two, kmer_size, size=20):
     """
     Creates a dot plot showing the k-mers present in both sequences. The first nucleotide of the duplicate k-mers are
         marked with a dot
+    :param size: size of the points
     :param kmer_size
     :param name_one:
     :param name_two:
@@ -34,7 +35,7 @@ def create_dot_plot(positions_x, positions_y, name_one, name_two, kmer_size):
     """
     mpl.use('TkAgg')
     # s is size
-    plt.scatter(positions_x, positions_y, s=2, lw=0, alpha=0.5)
+    plt.scatter(positions_x, positions_y, s=size, lw=0, alpha=0.5)
     plt.ylabel(name_two)
     plt.xlabel(name_one)
     plt.axis('scaled')
