@@ -8,7 +8,7 @@ usage = """
 Main.py: Main.py is used to handle the user input, call the right functions and return the final output
 
 Usage:
-    Main.py -k <kmer_size> [-r <dpi>] [-s <self>] <files>...
+    Main.py -k <kmer_size> [-r <dpi>] [-s <self>] [-d <dot_size>] <files>...
     Main.py (-h | --help | --version)
     
 Options:
@@ -16,6 +16,7 @@ Options:
     -r <dpi>        Specify the DPI [default: 600]
     -s <self>       Specify if files should be plotted against themselves, use Y to plot against itself or N to not 
                     plot against itself [default: Y]
+    -d <dot_size>   Specify the dot size to be used in the dot plot [default: 2]
     <files>...      Specify the files which are plotted against each other
 """
 
@@ -27,8 +28,6 @@ import InlineKmer
 import FastaSequence
 import CreateDotPlot
 import ReadFasta
-import time
-import os
 
 
 def main(args):
@@ -44,6 +43,7 @@ def main(args):
     files = args['<files>']
     on_self = args['-s']
     dpi = int(args['-r'])
+    dotsize = int(args['-d'])
 
     # Check if arguments are correctly specified
     if on_self.upper() not in ['Y', 'N']:
@@ -77,25 +77,31 @@ def main(args):
     else:
         start = 1
 
-    positions = []
+    plot_info_list = []
 
     # find all overlapping k-mers
     while len(indexes) > start:
         for i in indexes[start:len(indexes)]:
             first = indexes[0]
+
             print(f"Matching {sequences[first].name} against {sequences[i].name}")
+            if sequences[first].name == sequences[i].name:
+                names = [sequences[first].name, ""]
+            else:
+                names = [sequences[first].name, sequences[i].name]
 
             print("Finding overlapping sequences")
-            positions.append(InlineKmer.find_overlapping_kmers(sequences[first].seq, sequences[i].seq, kmer_size)
-                             + [sequences[first].name, sequences[i].name])
+            plot_info_list.append(InlineKmer.find_overlapping_kmers(sequences[first].seq, sequences[i].seq, kmer_size)
+                                  + names)
 
         indexes = indexes[1:len(indexes)]
 
     # create plots
     print("Making plots")
 
-    for position in positions:
-        fig, file = CreateDotPlot.create_dot_plot(position[0], position[1], position[2], position[3], kmer_size)
+    for plot_info in plot_info_list:
+        fig, file = CreateDotPlot.create_dot_plot(plot_info[0], plot_info[1], plot_info[2], plot_info[3], kmer_size,
+                                                  dotsize)
         fig.savefig(file, dpi=dpi)
 
 

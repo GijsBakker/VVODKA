@@ -3,7 +3,6 @@
 """
 ReadFasta.py: Is used to read in fasta files
 """
-from Bio import SeqIO
 import pyfastx
 
 

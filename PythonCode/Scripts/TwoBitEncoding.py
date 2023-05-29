@@ -26,7 +26,6 @@ def main():
     sequence = string_to_two_bit(x)
     k_mer = string_to_two_bit(y)
     patters = re.compile(bytes(k_mer))
-
     print([match.start() for match in patters.finditer(sequence)])
 
 
