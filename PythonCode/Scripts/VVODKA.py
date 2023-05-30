@@ -17,13 +17,15 @@ Options:
 """
 
 __author__ = "Gijs Bakker"
-__version__ = 0.5
+__version__ = 1.0
 
 from docopt import docopt
 import InlineKmer
 import FastaSequence
 import CreateDotPlot
 import ReadFasta
+import time
+from Logger import logger
 
 
 def get_sequences(files):
@@ -114,12 +116,18 @@ def vvodka(kmer_size, files, on_self, dpi, dot_size):
 
 
 def main(args):
+    start = time.time()
+
     kmer_size = int(args['-k'])
     files = args['<files>']
     on_self = args['-s']
     dpi = int(args['-r'])
     dot_size = int(args['-d'])
     vvodka(kmer_size, files, on_self, dpi, dot_size)
+
+    stop = time.time()
+    text = f" Time: {stop - start}; Data: {files}; K-mer size: {kmer_size}\n"
+    logger(text, "../Logs/VVODKA_timed")
 
 
 if __name__ == '__main__':

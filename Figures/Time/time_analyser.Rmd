@@ -1,0 +1,21 @@
+---
+title: "time_analysis"
+output: html_document
+date: "2023-05-30"
+---
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+times = c(30.49, 107.15, 226.76, 387.46)
+size = c(79,158,237,315)
+plot(times ~ size)
+```
+
+```{r}
+time_data = data.frame(times, sequences)
+
+ggplot(data = time_data, aes(x=size, y=times)) + geom_point()
+```

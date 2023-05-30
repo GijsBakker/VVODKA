@@ -1,0 +1,19 @@
+ Time: 0.6991133689880371; Data: ['../../data/ExampleTestData/Example3.fna']; K-mer size: 3
+ Time: 0.6838607788085938; Data: ['../../data/ExampleTestData/Example2.fna']; K-mer size: 3
+ Time: 0.6838514804840088; Data: ['../../data/ExampleTestData/Example1.fna']; K-mer size: 3
+ Time: 29.09508967399597; Data: ['../../data/PaperData/Cflag_c131.fna']; K-mer size: 10
+ Time: 30.813070058822632; Data: ['../../data/PaperData/Cflag_c131.fna']; K-mer size: 13
+ Time: 31.624735832214355; Data: ['../../data/PaperData/Cflag_c131.fna']; K-mer size: 16
+ Time: 32.2141375541687; Data: ['../../data/PaperData/Cflag_c131.fna']; K-mer size: 19
+ Time: 32.624642848968506; Data: ['../../data/PaperData/Cflag_c131.fna']; K-mer size: 22
+
+ Time: 30.813070058822632; Data: ['../../data/PaperData/Cflag_c131.fna']; K-mer size: 13
+ Time: 30.173792123794556; Data: ['../../data/Increasing_sized_data/Cflag_c131.fna']; K-mer size: 13
+ Time: 108.7567765712738; Data: ['../../data/Increasing_sized_data/Cflag_c131_2X.fna']; K-mer size: 13
+ Time: 105.55189156532288; Data: ['../../data/Increasing_sized_data/Cflag_c131_2X.fna']; K-mer size: 13
+ Time: 230.24398636817932; Data: ['../../data/Increasing_sized_data/Cflag_c131_3X.fna']; K-mer size: 13
+ Time: 223.28419661521912; Data: ['../../data/Increasing_sized_data/Cflag_c131_3X.fna']; K-mer size: 13
+ Time: 389.73680782318115; Data: ['../../data/Increasing_sized_data/Cflag_c131_4X.fna']; K-mer size: 13
+ Time: 385.1752722263336; Data: ['../../data/Increasing_sized_data/Cflag_c131_4X.fna']; K-mer size: 13
+ Time: 592.476804971695; Data: ['../../data/Increasing_sized_data/Cflag_c131_5X.fna']; K-mer size: 13
+ Time: 593.3400464057922; Data: ['../../data/Increasing_sized_data/Cflag_c131_5X.fna']; K-mer size: 13
