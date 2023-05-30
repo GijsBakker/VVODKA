@@ -3,7 +3,6 @@
 """
 2bitEncoding: Is used to compress dna strings to each nucleotide being represented with just two bits
 """
-import re
 
 bin_dict = {'A': 0b00, 'C': 0b01, 'G': 0b10, 'T': 0b11}
 
@@ -18,16 +17,3 @@ def string_to_two_bit(sequence):
     for nucleotide in sequence:
         compressed.append(bin_dict[nucleotide])
     return compressed
-
-
-def main():
-    x = "AAAAAAAAAAAAAAAAAAAAAAAAAAATTTAAAAAAAAAAAAAAATTTAAAAA"
-    y = "TTT"
-    sequence = string_to_two_bit(x)
-    k_mer = string_to_two_bit(y)
-    patters = re.compile(bytes(k_mer))
-    print([match.start() for match in patters.finditer(sequence)])
-
-
-if __name__ == '__main__':
-    main()

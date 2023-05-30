@@ -48,12 +48,9 @@ def find_overlap_kmers(seq1, seq2, kmer_length):
     This function finds all positions where k-mers overlap between two dna sequences.
     :param seq1: String of sequence one
     :param seq2: String of sequence two
-    :param kmer_length:
-    :return:
+    :param kmer_length: The length of the k-mers
+    :return: A list containing lists of x and y coordinates
     """
-    # TODO object instead of list
-    # TODO shorten code if possible
-    possible_kmers = []
     final_kmers = []
 
     for x_pos in range(len(seq1) - kmer_length +1):
