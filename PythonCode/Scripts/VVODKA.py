@@ -116,7 +116,7 @@ def vvodka(kmer_size, files, on_self, dpi, dot_size):
 
 
 def main(args):
-    start = time.time()
+    # start = time.time()
 
     kmer_size = int(args['-k'])
     files = args['<files>']
@@ -125,9 +125,9 @@ def main(args):
     dot_size = int(args['-d'])
     vvodka(kmer_size, files, on_self, dpi, dot_size)
 
-    stop = time.time()
-    text = f" Time: {stop - start}; Data: {files}; K-mer size: {kmer_size}\n"
-    logger(text, "../Logs/VVODKA_timed")
+    # stop = time.time()
+    # text = f" Time: {stop - start}; Data: {files}; K-mer size: {kmer_size}\n"
+    # logger(text, "../Logs/VVODKA_timed")
 
 
 if __name__ == '__main__':
