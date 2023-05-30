@@ -10,15 +10,15 @@ from Scripts.TwoBitEncoding import string_to_two_bit
 
 class TestKmer(unittest.TestCase):
     def test_find_overlap_kmers(self):
-        sequence_one = string_to_two_bit("TTT")
-        sequence_two = string_to_two_bit("AAAAATTTAAAAAAATTTAA")
+        sequence_one = string_to_two_bit("GGG")
+        sequence_two = string_to_two_bit("AAAAAGGGAAAAAAAGGGAA")
         got = InlineKmer.find_overlap_kmers(sequence_one, sequence_two, 3)
         expected = [(0, 5), (0, 15)]
         self.assertEqual(expected, got)
 
     def test_find_overlap_kmers_inverted(self):
         sequence_one = string_to_two_bit("ATC")
-        sequence_two = string_to_two_bit("AAAAAATCAAAAAAACTAAA")
+        sequence_two = string_to_two_bit("AAAAAATCAAAAAAAGATAA")
         got = InlineKmer.find_overlap_kmers(sequence_one, sequence_two, 3)
         expected = [(0, 5), (0, 15)]
         self.assertEqual(expected, got)
