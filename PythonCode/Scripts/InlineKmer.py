@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 
-usage = """
-"""
 
 __author__ = "Gijs Bakker"
 __version__ = 0.1
