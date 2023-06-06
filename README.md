@@ -25,10 +25,10 @@ git clone https://github.com/GijsBakker/VVODKA
 ```
 
 ## Example Data
-### TODO update after cleanup
-* small: EMALE04 - 3 viral genomes (25 kbp in size)
-* medium: Prochlorococcus - 5 bacterial genomes (~2 Mbp in size)
-* large: Arabidoptsis - 2 eukaryotic genomes (120-200 Mbp in size)
+* EMALE04 - 3 viral genomes (25 kbp in size)
+* Prochlorococcus - 5 bacterial genomes (~2 Mbp in size)
+* Arabidoptsis - 2 eukaryotic genomes (120-200 Mbp in size)
+* Cflag_c131 - EMALE intergrated in sequence containing retrotransposon (79KB in size)
 
 ## Usage
 To generate a genome dot plot using VVODKA, you need to provide the following information:
