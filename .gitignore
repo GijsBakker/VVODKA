@@ -132,3 +132,6 @@ dmypy.json
 Results/
 data/
 Figures/
+PythonCode/Logs
+PythonCode/Results
+PythonCode/.idea
