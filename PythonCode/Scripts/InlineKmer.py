@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 
 
+from Rabin_karp import rabin_karp
+
 __author__ = "Gijs Bakker"
 __version__ = 0.1
 
@@ -41,9 +43,10 @@ def invert_kmer(kmer):
     return inverted_kmer
 
 
-def find_overlap_kmers(seq1, seq2, kmer_length):
+def find_overlap_kmers(seq1, seq2, kmer_length, naive=True):
     """
     This function finds all positions where k-mers overlap between two dna sequences.
+    :param naive: boolean indicating if naive algorithm should be used. When false Rabin-karp will be used.
     :param seq1: String of sequence one
     :param seq2: String of sequence two
     :param kmer_length: The length of the k-mers
@@ -56,12 +59,20 @@ def find_overlap_kmers(seq1, seq2, kmer_length):
         kmer_rev = invert_kmer(kmer[::-1])
         y_kmers = []
         x_kmers = []
-        if kmer in seq2:
-            y_kmers += [y_pos for y_pos in find_all(kmer, seq2)]
-            x_kmers += [x_pos for y_pos in range(len(y_kmers))]
-        if kmer_rev in seq2 and kmer != kmer_rev:
-            y_kmers += [y_pos for y_pos in find_all(kmer_rev, seq2)]
-            x_kmers += [x_pos for y_pos in range(len(y_kmers))]
+        if naive:
+            if kmer in seq2:
+                y_kmers += [y_pos for y_pos in find_all(kmer, seq2)]
+                x_kmers += [x_pos for y_pos in range(len(y_kmers))]
+            if kmer_rev in seq2 and kmer != kmer_rev:
+                y_kmers += [y_pos for y_pos in find_all(kmer_rev, seq2)]
+                x_kmers += [x_pos for y_pos in range(len(y_kmers))]
+        else:
+            if kmer in seq2:
+                y_kmers += [y_pos for y_pos in rabin_karp(kmer, seq2)]
+                x_kmers += [x_pos for y_pos in range(len(y_kmers))]
+            if kmer_rev in seq2 and kmer != kmer_rev:
+                y_kmers += [y_pos for y_pos in rabin_karp(kmer_rev, seq2)]
+                x_kmers += [x_pos for y_pos in range(len(y_kmers))]
 
         final_kmers += list(zip(x_kmers, y_kmers))
     return final_kmers

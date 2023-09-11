@@ -77,7 +77,7 @@ def get_plot_info(on_self, sequences, kmer_size):
 
             print("Finding overlapping sequences")
             plot_info_list.append(InlineKmer.find_overlapping_kmers(sequences[first].seq, sequences[i].seq, kmer_size)
-                                  + names)  
+                                  + names)
 
         indexes = indexes[1:len(indexes)]
     return plot_info_list

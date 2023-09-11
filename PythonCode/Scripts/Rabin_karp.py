@@ -5,7 +5,7 @@ Rabin_karp.py is a script used by by VVODKA to find substrings within a larger s
 """
 
 bin_dict = {0b00: 1, 0b01: 2, 0b10: 3, 0b11: 4}
-bin_dict_temp = {'A': 1, 'C': 2, 'G': 3, 'T': 4}
+#bin_dict = {'A': 1, 'C': 2, 'G': 3, 'T': 4}
 
 
 def custom_hash(text):
@@ -18,7 +18,7 @@ def custom_hash(text):
     length = len(text)
     for index, letter in enumerate(text):
         # 10 should be fine being a 4 considering there are only 4 possible letters
-        number += bin_dict_temp[letter] * (10 ** (length - index-1))
+        number += bin_dict[letter] * (10 ** (length - index - 1))
 
     return number
 
@@ -45,11 +45,10 @@ def rabin_karp(sub_str, text):
             # subtract waarde van de eerste letter van de hashfunction
             # doe overige getal x10
             # Add waarde nieuwe getal
+            print(text, index)
+            text_hashed = (text_hashed - bin_dict[text[index - 1]] * 10 ** (sub_len - 1)) * 10 + \
+                          custom_hash(text[index+sub_len-1])
 
-            text_hashed = (text_hashed - bin_dict_temp[text[index-1]] * 10 ** (sub_len-1)) * 10 + \
-                               custom_hash(text[index+sub_len-1])
-        
-        print(text_hashed, sub_hashed)
         if text_hashed == sub_hashed:
             if sub_str == text[index: index+sub_len]:
                 overlaps.append(index)
