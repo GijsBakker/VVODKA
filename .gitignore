@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 #Results
-Results/
+Results/*
 data/
 Figures/
 PythonCode/Logs
