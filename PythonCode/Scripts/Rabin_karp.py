@@ -4,8 +4,8 @@
 Rabin_karp.py is a script used by by VVODKA to find substrings within a larger string
 """
 
-bin_dict = {0b00: 1, 0b01: 2, 0b10: 3, 0b11: 4}
-#bin_dict = {'A': 1, 'C': 2, 'G': 3, 'T': 4}
+#bin_dict = {0b00: 1, 0b01: 2, 0b10: 3, 0b11: 4}
+bin_dict = {'A': 1, 'C': 2, 'G': 3, 'T': 4}
 
 
 def custom_hash(text):
@@ -45,13 +45,12 @@ def rabin_karp(sub_str, text):
             # subtract waarde van de eerste letter van de hashfunction
             # doe overige getal x10
             # Add waarde nieuwe getal
-            print(text, index)
             text_hashed = (text_hashed - bin_dict[text[index - 1]] * 10 ** (sub_len - 1)) * 10 + \
                           custom_hash(text[index+sub_len-1])
 
         if text_hashed == sub_hashed:
-            if sub_str == text[index: index+sub_len]:
-                overlaps.append(index)
+            # if sub_str == text[index: index+sub_len]:
+            overlaps.append(index)
 
     return overlaps
 
